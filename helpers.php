@@ -21,7 +21,7 @@ function fetch_user_data_by_session_id($db)
 function checkCureentUrlLogin()
 {
     $cureentage = $_SERVER['REQUEST_URI'];
-    return in_array($cureentage, ['/labs/Belal/login.php', '/labs/Belal/register.php']);
+    return in_array($cureentage, ['/belal/login.php', '/belal/register.php']);
 }
 
 function checkSession($db)
@@ -41,16 +41,18 @@ function checkSession($db)
     }
 }
 
+
+
+
+
 function validateImage($image)
 {
 
     $imageExtension = strtolower(pathinfo($image['name'], PATHINFO_EXTENSION));
     $imageName = uniquifyFileName($image, $imageExtension);
-    $images_Storage = "./uploads/categories_images/";
+    $images_Storage = "uploads/categories_images/";
     $error = 0;
     $imageErr = false;
-    // print_r($image['tmp_name']);
-    // die();
 
 
     if ($image['tmp_name'] == null) {
@@ -103,11 +105,13 @@ function isPermitevPath($imageExtension)
 function createDir($images_Storage)
 {
     if (!is_dir($images_Storage)) {
-
-        mkdir($images_Storage, 0777, true);
-        @chmod($images_Storage, 0777);
+        if (!mkdir($images_Storage, 0777, true)) {
+            die("Failed to create directory: " . $images_Storage);
+        }
+        chmod($images_Storage, 0777);
     }
 }
+
 
 function uploadImage($image, $path)
 {
@@ -132,50 +136,26 @@ function ValidateOnlyLtrsAndSpcs($name)
 {
     return preg_match("/^[a-zA-Z-' ]*$/",  $name);
 }
-/*
-
-function checkSession($db)
-{
-
-    print_r($_SESSION);
-    die();
-    if (!empty($_SESSION['id'])) {
-        $user_data = fetch_user_data_by_session_id($db);
-
-        if ($_SESSION['id'] != $user_data['id']) {
-            header("location: ./login.php");
-        } elseif (checkCureentUrlLogin()) {
-            print_r(checkCureentUrlLogin());
-            die();
-            header("location: ./index.php");
-        }
-    } else {
-        header("location: ./login.php");
-    }
-}*/
 
 
 
 
+// function checkSession($db)
+// {
 
+//     print_r($_SESSION);
+//     die();
+//     if (!empty($_SESSION['id'])) {
+//         $user_data = fetch_user_data_by_session_id($db);
 
-
-
-
-
-
-//     } else {
-//         if (!checkCureentUrlLogin()) {
+//         if ($_SESSION['id'] != $user_data['id']) {
 //             header("location: ./login.php");
+//         } elseif (checkCureentUrlLogin()) {
+//             print_r(checkCureentUrlLogin());
+//             die();
+//             header("location: ./index.php");
 //         }
+//     } else {
+//         header("location: ./login.php");
 //     }
 // }
-
-
-
-
-// elseif ($_SERVER['PHP_SELF'] != "/Belal/index.php") {
-        //     if ($_SERVER['PHP_SELF'] != "/Belal/user_account.php") {
-        //         header("location: ./index.php");
-        //     }
-        // }

@@ -2,7 +2,7 @@
 
 include "./db_connection.php";
 if (isset($_GET['id'])) {
-    $user_id = $_GET['id'];
+    $user_id = secureInput($_GET['id']);
     $sql = "delete from users where id = '" . $user_id . "'";
     $delete_user = $db->query($sql);
     if ($delete_user) {

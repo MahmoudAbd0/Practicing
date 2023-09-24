@@ -1,7 +1,7 @@
 <?php
 include "./db_connection.php";
-include "./layout/header.php";
-include "./layout/footer.php";
+// include "./layout/header.php";
+// include "./layout/footer.php";
 
 
 ?>
@@ -25,15 +25,14 @@ include "./layout/footer.php";
                 <td>
                     <?php echo $row['name']; ?>
                 </td>
-
-                <td>
-                    <a href="<?php echo $row['image']; ?>">view image</a>
-                </td>
-
                 <td>
                     <?php if (!empty($row['image']) && file_exists($row['image'])) {
                         echo "<img src='" . $row['image'] . "' alt='image' style='width:50px'>";
                     } ?>
+                </td>
+                <td>
+                    <a href="./update_category.php?id= <?php echo $row['id'] ?>">edit</a>
+                    <a href="./delete_category.php?id= <?php echo $row['id'] ?>">delete</a>
                 </td>
             </tr>
         <?php   } ?>
