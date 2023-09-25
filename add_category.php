@@ -36,9 +36,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $result = $db->query($sql);
         chmod($storedImagePath, 0777);
         if ($result) {
-            die("Category Added Successfully");
+            header("Refresh:2");
+            echo ("Category Added Successfully");
         } else {
-            die("An Error Occured - Category Not Saved");
+            print_r("An Error Occured - Category Not Saved");
         }
     }
 }

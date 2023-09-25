@@ -31,8 +31,8 @@ include "./db_connection.php";
                     } ?>
                 </td>
                 <td>
-                    <a href="./update_category.php?id= <?php echo $row['id'] ?>">edit</a>
-                    <a href="./delete_category.php?id= <?php echo $row['id'] ?>">delete</a>
+                    <a href="./update_category.php?id=<?php echo $row['id']; ?>">edit</a>
+                    <a href="./delete_category.php?id=<?php echo $row['id']; ?>">delete</a>
                 </td>
             </tr>
         <?php   } ?>
