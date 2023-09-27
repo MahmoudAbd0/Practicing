@@ -63,19 +63,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $error = 1;
             $imageErr = "Maximum Image Is 1MB";
         }
+        if (!$error) {
+            if (!is_dir($image_storage)) {
+                mkdir($image_storage, 0777, true);
+            }
+        }
     } else {
         $targetImagePath = $category['image'];
     }
+    if (!$error) {
+
+        $sql = "update categories set name = '" . $name . "', image = '" . $targetImagePath . "' where id = '" . $category_id . "'";
+        $result = $db->query($sql);
+        header("location: ./update_category.php?id=$category_id");
+    }
 }
 
-if (!$error) {
-    move_uploaded_file($image['tmp_name'], $targetImagePath);
 
-    $sql = "update categories set name = '" . $name . "', image = '" . $targetImagePath . "' where id = '" . $category_id . "'";
-    $result = $db->query($sql);
-    print_r("Category Updated Successfully");
-    header("location: ./update_categories");
-}
 
 ?>
 
@@ -91,4 +95,6 @@ if (!$error) {
     <span><?php echo $imageErr ?></span>
 
     <button type="submit">submit</button>
+    <br><br>
+    <a href="./categories.php">categories</a>
 </form>
