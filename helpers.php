@@ -138,6 +138,10 @@ function ValidateOnlyLtrsAndSpcs($name)
 }
 
 
+function validateMimeType($imageExtension, $allowedMimes)
+{
+    return in_array($imageExtension, $allowedMimes);
+}
 
 
 // function checkSession($db)
