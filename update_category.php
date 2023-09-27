@@ -67,6 +67,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (!is_dir($image_storage)) {
                 mkdir($image_storage, 0777, true);
             }
+            if (file_exists($category['image'])) {
+                unlink($category['image']);
+            }
+            move_uploaded_file($image['tmp_name'], $targetImagePath);
         }
     } else {
         $targetImagePath = $category['image'];
