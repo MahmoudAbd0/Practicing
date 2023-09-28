@@ -8,6 +8,15 @@ function secureInput($input)
     return $input;
 }
 
+function secureNumericInput($input)
+{
+
+    $input = trim($input, "\t\n\r\x0B");
+    $input = stripslashes($input);
+    $input = htmlspecialchars($input);
+    return (int) $input;
+}
+
 
 function fetch_user_data_by_session_id($db)
 {
@@ -136,6 +145,14 @@ function ValidateOnlyLtrsAndSpcs($name)
 {
     return preg_match("/^[a-zA-Z-' ]*$/",  $name);
 }
+
+
+function ValidateOnlyLtrsAndSpcsAndNums($name)
+{
+    return preg_match("/^[a-zA-Z-' 0-9]*$/",  $name);
+}
+
+
 
 
 function validateMimeType($imageExtension, $allowedMimes)
